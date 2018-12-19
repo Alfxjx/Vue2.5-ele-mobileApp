@@ -1,6 +1,8 @@
 # sell
 
 > A Vue.js project
+>
+> [笔记/NOTES](https://github.com/Alfxjx/Vue2.5-ele-mobileApp/blob/master/Vue-eleme-app-note.md)
 
 ## Build Setup
 
