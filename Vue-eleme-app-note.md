@@ -190,3 +190,101 @@ overflow: hidden;
 text-overflow: ellipsis;
 ```
 
+### v-show & @click="show()"
+
+```vue
+<div class="detail" v-show="detailShow">
+<div class="bulletin-wrapper" @click="showDetail"></div>
+
+<script>
+data () {
+      return {
+        detailShow: false
+      }
+    },
+methods: {
+      showDetail () {
+        this.detailShow = true
+      }
+    }
+</script>
+```
+
+### Sticky Footer样式
+
+```
+<div class="detail-wrapper clearfix">
+        <div class="detail-main">
+    	</div>
+</div>
+<div class="detail-close">
+        <i class="icon-close"></i>
+</div>
+```
+
+```stylus
+.clearfix
+  display inline-block
+  &:after
+    content "."
+    display block
+    height 0
+    line-height 0
+    clear both
+    visibility hidden
+
+.detail-wrapper
+        min-height 100%
+        .detail-main
+          margin-top 64px
+          //important
+          padding-bottom 64px
+      .detail-close
+        position relative
+        width 32px
+        height 32px
+        //important
+        margin -64px auto 0 auto
+        clear both
+        font-size 32px    
+    
+```
+
+### 向下去整
+
+```javascript
+Math.floor(this.score * 2) / 2
+```
+
+### 组件抽象
+
+见`star/star.vue`
+
+**我在抽象`line-title`时遇见的一个问题**
+
+就是`:title="bonus"`，然后父组件里面添加数据`bonus:'优惠信息'`，接着子组件的`{{title}}`才会显示，要是不添加`bonus:'优惠信息'`，而是直接`:title="优惠信息"`，就显示不出来了。
+
+```vue
+//不显示
+<lineTitle :title="优惠信息"></lineTitle>
+//正确
+<lineTitle :title="'商家公告'"></lineTitle>
+```
+
+这是因为绑定的子组件中的title是一个String类型的，所以`:title=""`里面也得是一个String类型的。
+
+### 文件别名`alias`
+
+位置在：`webpack.base.conf.js/reslove{'alias'}`
+
+### `v-for`
+
+for之后的 a in b, 需要加上空格
+
+```vue
+//right
+<li class="support-item" v-for="(item,index) in seller.supports" :key="index">
+//wrong
+<li class="support-item" v-for="(item,index)in seller.supports" :key="index">
+```
+
