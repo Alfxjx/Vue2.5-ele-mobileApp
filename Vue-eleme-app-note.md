@@ -288,3 +288,28 @@ for之后的 a in b, 需要加上空格
 <li class="support-item" v-for="(item,index)in seller.supports" :key="index">
 ```
 
+### api调用
+
+```javascript
+computed(){
+    this.$http.get('/api/goods').then((res) => {
+        res = res.body
+        if (res.errno === ERR_OK) {
+          this.goods = res.data
+        }
+      })
+}
+```
+
+### `margin`重叠
+
+外边距会重叠起来，因此不会变成想象中两倍的距离。
+
+### ref 绑定DOM
+
+v-ref、v-el 弃用 统一使用ref属性为元素或组件添加标记，然后通过this.$refs获取。 
+开始我用:
+`<div class="menu-wrapper" ref="menu-wrapper"> `
+来绑定dom对象，然而浏览器报错vue.esm.js?65d7:434 [Vue warn]: Error in nextTick: “TypeError: Cannot read property ‘children’ of undefined”，在经过多次修改后，发现
+`<div class="menu-wrapper" ref="menuWrapper"> `
+将ref里“-”去掉，就不会报错了，应该是修改了命名规则吧。
