@@ -2,7 +2,8 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item, index) in goods" :key="index" class="menu-item">
+        <li v-for="(item, index) in goods" :key="index" class="menu-item" :class="{'current':currentIndex===index}"
+            @click="selectMenu(index,$event)" ref="menuList">
           <span class="text border-1px">
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -11,10 +12,10 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="(item, index) in goods" :key="index" class="food-list">
+        <li v-for="(item, index) in goods" :key="index" class="food-list" ref="foodList">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="(food, index) in item.foods" :key="index" class="food-item">
+            <li v-for="(food, index) in item.foods" :key="index" class="food-item" @click="selectFood(food, $event)">
               <div class="icon">
                 <img :src="food.icon" width="57" height="57">
               </div>
@@ -25,7 +26,8 @@
                   <span class="count">月售{{food.sellCount}}</span><span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="now">￥{{food.price}}</span><span class="old"
+                                                                v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
               </div>
             </li>
@@ -44,7 +46,10 @@
     name: 'goods',
     data () {
       return {
-        goods: []
+        goods: [],
+        listHeight: [],
+        scrollY: 0,
+        selectedFood: {}
       }
     },
     created () {
@@ -56,14 +61,68 @@
           this.goods = res.data
           this.$nextTick(() => {
             this._initScroll()
+            this._calculateHeight()
           })
         }
       })
     },
     methods: {
+      selectMenu (index, event) {
+        if (!event._constructed) {
+          return
+        }
+        let foodList = this.$refs.foodList
+        let el = foodList[index]
+        this.foodScroll.scrollToElement(el, 300)
+      },
+      selectFood (food, event) {
+        if (!event._constructed) {
+          return
+        }
+        this.selectedFood = food
+        // this.$refs.food.show()
+      },
       _initScroll () {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
-        this.foodScroll = new BScroll(this.$refs.foodsWrapper, {})
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+          click: true
+        })
+        this.foodScroll = new BScroll(this.$refs.foodsWrapper, {
+          click: true,
+          probeType: 3
+        })
+        this.foodScroll.on('scroll', (pos) => {
+          if (pos.y <= 0) {
+            this.scrollY = Math.abs(Math.round(pos.y))
+          }
+        })
+      },
+      _calculateHeight () {
+        let foodList = this.$refs.foodList
+        let height = 0
+        this.listHeight.push(height)
+        for (let i = 0; i < foodList.length; i++) {
+          let item = foodList[i]
+          height += item.clientHeight
+          this.listHeight.push(height)
+        }
+      },
+      _followScroll (index) {
+        let menuList = this.$refs.menuList
+        let el = menuList[index]
+        this.menuScroll.scrollToElement(el, 300, 0, -100)
+      }
+    },
+    computed: {
+      currentIndex () {
+        for (let i = 0; i < this.listHeight.length; i++) {
+          let height1 = this.listHeight[i]
+          let height2 = this.listHeight[i + 1]
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+            // this._followScroll(i)
+            return i
+          }
+        }
+        return 0
       }
     }
   }
@@ -88,6 +147,13 @@
         width 56px
         padding 0 12px
         line-height 14px
+        &.current
+          z-index 10
+          margin-top -1px
+          background #ffffff
+          font-weight 700
+          .text
+            border-none()
         .icon
           display inline-block
           vertical-align top
