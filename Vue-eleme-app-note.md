@@ -313,3 +313,15 @@ v-ref、v-el 弃用 统一使用ref属性为元素或组件添加标记，然后
 来绑定dom对象，然而浏览器报错vue.esm.js?65d7:434 [Vue warn]: Error in nextTick: “TypeError: Cannot read property ‘children’ of undefined”，在经过多次修改后，发现
 `<div class="menu-wrapper" ref="menuWrapper"> `
 将ref里“-”去掉，就不会报错了，应该是修改了命名规则吧。
+
+### 圆形图标
+
+`border-radius 50%`
+
+### border-box模型
+
+看看这个[链接](https://www.jianshu.com/p/006a422afb8e)
+
+### props
+
+`props`接受来自父组件的值，也就是`props`写在子组件的`<script>`里面，接受父组件`v-bind`过来的信息。

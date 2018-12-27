@@ -35,15 +35,22 @@
         </li>
       </ul>
     </div>
+    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
+  import shopcart from '../../components/shopcart/shopcart'
 
   const ERR_OK = 0
   export default {
     name: 'goods',
+    props: {
+      seller: {
+        type: Object
+      }
+    },
     data () {
       return {
         goods: [],
@@ -124,6 +131,9 @@
         }
         return 0
       }
+    },
+    components: {
+      shopcart
     }
   }
 </script>
