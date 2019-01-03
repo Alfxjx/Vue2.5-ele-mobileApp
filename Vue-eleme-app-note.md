@@ -325,3 +325,45 @@ v-ref、v-el 弃用 统一使用ref属性为元素或组件添加标记，然后
 ### props
 
 `props`接受来自父组件的值，也就是`props`写在子组件的`<script>`里面，接受父组件`v-bind`过来的信息。
+
+
+
+### 函数柯里化
+
+[link](https://www.cnblogs.com/pigtail/p/3447660.html)
+
+在计算机科学中，柯里化（英语：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家哈斯凯尔·加里命名的，尽管它是 Moses Schönfinkel 和 Gottlob Frege 发明的。
+
+这是来自维基百科的名词解释。顾名思义，柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求。这增加了函数的适用性，但同时也降低了函数的适用范围
+
+### 反引号
+
+可以比较方便的拼接字符串。
+
+```es6
+`还差￥${diff}元起送`
+```
+
+### 计算属性判断对应的样式
+
+```vue
+<div class="pay" :class="payClass">{{payDesc}}</div>
+
+<script>
+      payClass () {
+        if (this.totalPrice < this.minPrice) {
+          return 'not-enough'
+        } else {
+          return 'enough'
+        }
+      }
+</script>
+
+<style>
+  &.not-enough
+    background: #2b333b
+  &.enough
+    background: #00b43c
+    color: #fff
+</style>
+```
