@@ -31,6 +31,8 @@
         } else {
           this.food.count++
         }
+        // 小球动画派发事件
+        this.$emit('add', event.target)
       },
       decreaseCart () {
         if (!event._constructed) {
