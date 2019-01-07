@@ -39,9 +39,10 @@
           </li>
         </ul>
       </div>
-      <shopcart ref="shopcart" :select-foods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+      <shopcart ref="shopcart" :select-foods="selectFoods" :deliveryPrice="seller.deliveryPrice"
+                :minPrice="seller.minPrice"></shopcart>
     </div>
-    <!--<food @click="addFood"></food>-->
+    <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -49,6 +50,7 @@
   import BScroll from 'better-scroll'
   import shopcart from 'components/shopcart/shopcart'
   import cartcontrol from 'components/cartcontrol/cartcontrol'
+  import food from 'components/food/food'
 
   const ERR_OK = 0
   export default {
@@ -94,12 +96,12 @@
           return
         }
         this.selectedFood = food
-        // this.$refs.food.show()
+        this.$refs.food.show()
       },
-      addFood(target) {
+      addFood (target) {
         this._drop(target)
       },
-      _drop(target) {
+      _drop (target) {
         // 体验优化,异步执行下落动画
         this.$nextTick(() => {
           this.$refs.shopcart.drop(target)
@@ -162,7 +164,8 @@
     },
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     }
   }
 </script>

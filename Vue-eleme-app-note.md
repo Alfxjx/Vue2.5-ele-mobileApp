@@ -367,3 +367,51 @@ v-ref、v-el 弃用 统一使用ref属性为元素或组件添加标记，然后
     color: #fff
 </style>
 ```
+
+### 如何在vue里面使用stylus
+
+```
+npm install stylus
+
+// in project
+
+npm install stylus --save-dev
+npm install stylus-loader --save-dev
+
+// in .vue 
+
+<style lang="stylus">
+</style>
+```
+
+### `translate3d()`
+
+样式里面的参数代表着移动的距离
+
+与transition里面的`tranform`配合，可以形成动画切换的效果。
+
+[ref](https://www.cnblogs.com/xiaohuochai/p/5351477.html)
+
+### 在图片加载之前为其预留位置，防止页面抖动
+
+这样图片位置通过`padding`就留出来了。
+
+```stylus
+.img-header
+      position relative
+      width 100%
+      height 0
+      padding-top 100%
+```
+
+### 添加动画来修复`food.vue`中小球的动画
+
+给`cartcontrol`上的按钮添加一个渐隐效果，可以使得计算小球飞出的位置时，能够找到出发的起始点。
+
+不然点击之后按钮消失，`cartcontrol`就失去了对位置的检测。
+
+### 阻止冒泡
+
+```vue
+@click.stop.prevent="decreaseCart"
+```
