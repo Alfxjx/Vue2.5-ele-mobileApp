@@ -96,6 +96,7 @@
           return
         }
         this.selectedFood = food
+        // 展示对应的商品的详情页
         this.$refs.food.show()
       },
       addFood (target) {

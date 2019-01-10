@@ -415,3 +415,16 @@ npm install stylus-loader --save-dev
 ```vue
 @click.stop.prevent="decreaseCart"
 ```
+
+### Better-scroll
+
+使用better-scroll的时候，需要将全部的需要滚动的DOM元素包含到对应的DIV里面去。
+
+```vue
+<template>
+  <!--里面都是待滚动的元素-->
+  <div ref="scroll">
+    <slot></slot>
+  </div>
+</template>
+```
