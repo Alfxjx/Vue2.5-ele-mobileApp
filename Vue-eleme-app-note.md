@@ -210,15 +210,14 @@ methods: {
 </script>
 ```
 
-### Sticky Footer样式
+### [Sticky Footer样式](https://www.cnblogs.com/shicongbuct/p/6487122.html)
 
 ```
 <div class="detail-wrapper clearfix">
-        <div class="detail-main">
-    	</div>
+    <div class="detail-main"></div>
 </div>
 <div class="detail-close">
-        <i class="icon-close"></i>
+    <i class="icon-close"></i>
 </div>
 ```
 
@@ -428,3 +427,20 @@ npm install stylus-loader --save-dev
   </div>
 </template>
 ```
+
+### js的Date类
+
+```javascript
+if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+  }
+```
+
+> test() 方法用于检测一个字符串是否匹配某个模式.
+> 如果字符串中有匹配的值返回 true ，否则返回 false。
+
+> replace(A,B)用B去替换A
+
+> 返回的是一个相对于初始日期（1970-1-1）的一个时间string，处理的时候使用`getFullYear()`等方法提取相应的时间。
+
+
