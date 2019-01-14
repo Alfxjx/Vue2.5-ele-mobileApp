@@ -444,3 +444,25 @@ if (/(y+)/.test(fmt)) {
 > 返回的是一个相对于初始日期（1970-1-1）的一个时间string，处理的时候使用`getFullYear()`等方法提取相应的时间。
 
 
+### 为什么我的better-scroll无法滚动呢
+
+一般的原因就是包裹层设置的定位需要将包裹的元素的滚动方向长度设置好，例如：
+
+```html
+<div class="wrapper">
+  <div class="content">
+    <ul>
+      <li v-for="rating in ratings"></li>
+    </ul>
+  </div>
+</div>
+```
+此时需要在样式中设定外层`wrapper`的高度（一般以纵向滚动为默认值）
+
+```stylus
+.wrapper
+  position: absolute
+  top 0
+  bottom 0
+//设置好上下的范围，确保尺寸是小于内容区，不然也滚动不了。
+```

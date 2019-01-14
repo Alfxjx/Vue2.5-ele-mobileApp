@@ -65,8 +65,6 @@
   import ratingselect from 'components/ratingselect/ratingselect'
   import {formatDate1} from 'common/js/date'
 
-  // const POSITIVE = 0
-  // const NEGATIVE = 1
   const ALL = 2
   export default {
     name: 'food',
