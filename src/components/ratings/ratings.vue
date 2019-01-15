@@ -38,7 +38,7 @@
               <h1 class="name">{{rating.username}}</h1>
               <div class="star-wrapper">
                 <star :size="24" :score="rating.score"></star>
-                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
+                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}分钟送达</span>
               </div>
               <p class="text">{{rating.text}}</p>
               <div class="recommend">
@@ -119,7 +119,7 @@
     filters: {
       formatDate (time) {
         let date = new Date(time)
-        return formatDate1(date, 'yyy-MM-dd hh:mm')
+        return formatDate1(date, 'yyyy-MM-dd hh:mm')
       }
     },
     components: {
