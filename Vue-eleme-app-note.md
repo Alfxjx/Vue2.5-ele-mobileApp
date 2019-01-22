@@ -466,3 +466,34 @@ if (/(y+)/.test(fmt)) {
   bottom 0
 //设置好上下的范围，确保尺寸是小于内容区，不然也滚动不了。
 ```
+### 横向滚动的准备工作
+
+`seller.vue`
+
+```javascript
+// 计算出滚动部件的总长
+// 因为需要待滚动区域比视口要大。
+_initPics () {
+if (this.seller.pics) {
+    let picWidth = 120
+    let margin = 6
+    let width = (picWidth + margin) * this.seller.pics.length - margin
+    this.$refs.picList.style.width = width + 'px'
+    this.$nextTick(() => {
+    if (!this.picScroll) {
+        this.picScroll = new BScroll(this.$refs.picWrapper, {
+        scrollX: true,
+        eventPassthrough: 'vertical'
+        })
+    } else {
+        this.picScroll.refresh()
+    }
+    })
+}
+}
+```
+> shift+tab 实现代码段整体左移
+
+### 在线调试
+
+`productionSourceMap: false,`这样就可以在生产环境禁止调试了。

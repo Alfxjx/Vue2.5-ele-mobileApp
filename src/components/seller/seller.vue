@@ -5,7 +5,7 @@
         <h1 class="title">{{seller.name}}</h1>
         <div class="desc border-1px">
           <star :size="36" :score="seller.score"></star>
-          <span class="text">{{seller.ratingCount}}</span>
+          <span class="text">({{seller.ratingCount}})</span>
           <span class="text">月售{{seller.sellCount}}单</span>
         </div>
         <ul class="remark">
