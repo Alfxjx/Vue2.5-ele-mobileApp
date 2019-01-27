@@ -497,3 +497,10 @@ if (this.seller.pics) {
 ### 在线调试
 
 `productionSourceMap: false,`这样就可以在生产环境禁止调试了。
+
+### keep-alive 标签内存保持
+```html
+<keep-alive>
+  <router-view :seller="seller"></router-view>
+</keep-alive>
+```
