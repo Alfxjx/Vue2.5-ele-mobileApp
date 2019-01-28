@@ -1,5 +1,7 @@
 # sell
 
+[Online View](http://188.131.204.37:9005)
+
 > A Vue.js project  by alfxjx
 >
 > [笔记/NOTES](https://github.com/Alfxjx/Vue2.5-ele-mobileApp/blob/master/Vue-eleme-app-note.md)
